@@ -75,9 +75,11 @@ Schema::dropView('active_users');
 Schema::dropViewIfExists('active_users');
 ```
 
+If you are using `php artisan migrate:fresh`, you can drop all views with `--drop-views` (Laravel 5.6.26+).
+
 ### Checking For View Existence
 
-Use `hasView()` to check if a view exists:
+Use `hasView()` to check whether a view exists:
 
 ```php
 use Staudenmeir\LaravelMigrationViews\Facades\Schema;
