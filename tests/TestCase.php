@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Facade;
 use PHPUnit\Framework\TestCase as Base;
-use Staudenmeir\LaravelMigrationViews\Facades\Schema;
 use Tests\Models\User;
 
 abstract class TestCase extends Base
@@ -28,9 +27,6 @@ abstract class TestCase extends Base
         $this->seed();
 
         Facade::setFacadeApplication(['db' => $db]);
-
-        Schema::dropViewIfExists('active_users');
-        Schema::dropViewIfExists('test');
     }
 
     /**
@@ -41,6 +37,7 @@ abstract class TestCase extends Base
     protected function migrate()
     {
         DB::schema()->dropAllTables();
+        DB::schema()->dropAllViews();
 
         DB::schema()->create('users', function (Blueprint $table) {
             $table->increments('id');
