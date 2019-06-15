@@ -1,0 +1,29 @@
+{
+    "name": "staudenmeir/laravel-migration-views",
+    "description": "Laravel migrations with views",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jonas Staudenmeir",
+            "email": "mail@jonas-staudenmeir.de"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "illuminate/database": "~5.5.25|5.6.*|5.7.*"
+    },
+    "require-dev": {
+        "laravel/homestead": "^7.0",
+        "phpunit/phpunit": "~6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Staudenmeir\\LaravelMigrationViews\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
