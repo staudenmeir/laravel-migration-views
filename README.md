@@ -6,7 +6,7 @@
 [![License](https://poser.pugx.org/staudenmeir/laravel-migration-views/license)](https://packagist.org/packages/staudenmeir/laravel-migration-views)
 
 ## Introduction
-This Laravel extension adds support for views in migrations.
+This Laravel extension adds support for SQL views in database migrations.
 
 Supports Laravel 5.5.25+.
  

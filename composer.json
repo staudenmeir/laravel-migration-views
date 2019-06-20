@@ -1,6 +1,6 @@
 {
     "name": "staudenmeir/laravel-migration-views",
-    "description": "Laravel migrations with views",
+    "description": "Laravel database migrations with SQL views",
     "license": "MIT",
     "authors": [
         {
