@@ -60,6 +60,7 @@ class Schema extends Base
         $driver = $connection->getDriverName();
 
         switch ($driver) {
+            case 'mariadb':
             case 'mysql':
                 $connection->setSchemaGrammar($connection->withTablePrefix(new MySqlGrammar));
 
