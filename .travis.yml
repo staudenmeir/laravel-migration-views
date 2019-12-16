@@ -16,14 +16,14 @@ matrix:
     - php: 7.2
       env: RELEASE=lowest
     - php: 7.3
+    - php: 7.4
       env: COVERAGE=yes
-    - php: 7.3
+    - php: 7.4
       env: COVERAGE=yes DB=pgsql
-    - php: 7.3
+    - php: 7.4
       env: COVERAGE=yes DB=sqlite
-    - php: 7.3
+    - php: 7.4
       env: COVERAGE=yes DB=sqlsrv
-    - php: 7.4snapshot
 
 cache:
   directories:
@@ -51,7 +51,7 @@ before_script:
         curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | sudo tee /etc/apt/sources.list.d/mssql-release.list
         sudo apt-get update
         sudo ACCEPT_EULA=Y apt-get install mssql-tools unixodbc-dev
-        pecl install pdo_sqlsrv
+        pecl install pdo_sqlsrv-5.7.1preview
         sudo /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Password! -Q "create database [test]"
       fi
 
