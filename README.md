@@ -8,11 +8,17 @@
 ## Introduction
 This Laravel extension adds support for SQL views in database migrations.
 
-Supports Laravel 5.5.25+.
+## Versions
+
+ Laravel | Package
+:--------|:----------
+ 5.5–5.7 | [1.0](https://github.com/staudenmeir/laravel-migration-views/tree/1.0)
+ 5.8     | [1.1](https://github.com/staudenmeir/laravel-migration-views/tree/1.1)
+ 6.x     | 1.3
  
 ## Installation
 
-    composer require staudenmeir/laravel-migration-views:"^1.0"
+    composer require staudenmeir/laravel-migration-views:"^1.3"
 
 ## Usage
 
