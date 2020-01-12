@@ -98,4 +98,13 @@ class SchemaTest extends TestCase
 
         $this->assertTrue(Schema::hasView('active_users'));
     }
+
+    public function testGetViewColumnListing()
+    {
+        Schema::createView('active_users', DB::table('users')->where('active', true));
+
+        $columns = Schema::getViewColumnListing('active_users');
+
+        $this->assertSame(['id', 'name', 'active', 'created_at', 'updated_at'], $columns);
+    }
 }

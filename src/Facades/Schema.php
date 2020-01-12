@@ -21,6 +21,7 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
  * @method static void dropView(string $name, bool $ifExists = false)
  * @method static void dropViewIfExists(string $name)
  * @method static bool hasView(string $name)
+ * @method static array getViewColumnListing(string $name)
  */
 class Schema extends Base
 {

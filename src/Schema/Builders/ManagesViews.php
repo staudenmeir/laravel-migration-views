@@ -129,4 +129,15 @@ trait ManagesViews
     {
         return [$this->connection->getDatabaseName(), $view];
     }
+
+    /**
+     * Get the column listing for a given view.
+     *
+     * @param string $name
+     * @return array
+     */
+    public function getViewColumnListing($name)
+    {
+        return $this->getColumnListing($name);
+    }
 }

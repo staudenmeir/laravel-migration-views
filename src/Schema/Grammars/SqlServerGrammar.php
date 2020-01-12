@@ -31,4 +31,16 @@ class SqlServerGrammar extends Base
     {
         return "select * from sys.objects where type = 'V' and name = ?";
     }
+
+    /**
+     * Compile the query to determine the column listing of a view.
+     *
+     * @return string
+     */
+    public function compileViewColumnListing()
+    {
+        return "select columns.name from sys.columns
+                join sys.objects on objects.object_id = columns.object_id
+                where objects.type = 'V' and objects.name = ?";
+    }
 }

@@ -20,6 +20,7 @@ Supports Laravel 5.5.25+.
 - [Renaming Views](#renaming-views)
 - [Dropping Views](#dropping-views)
 - [Checking For View Existence](#checking-for-view-existence)
+- [Listing View Columns](#listing-view-columns)
 
 ### Creating Views
 
@@ -87,6 +88,16 @@ use Staudenmeir\LaravelMigrationViews\Facades\Schema;
 if (Schema::hasView('active_users')) {
     //
 }
+```
+
+### Listing View Columns
+
+Use `getViewColumnListing()` to get the column listing for a view:
+
+```php
+use Staudenmeir\LaravelMigrationViews\Facades\Schema;
+
+$columns = Schema::getViewColumnListing('active_users');
 ```
 
 ## Contributing

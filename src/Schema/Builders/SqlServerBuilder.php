@@ -53,4 +53,20 @@ class SqlServerBuilder extends Base
     {
         return [$view];
     }
+
+    /**
+     * Get the column listing for a given view.
+     *
+     * @param string $name
+     * @return array
+     */
+    public function getViewColumnListing($name)
+    {
+        $results = $this->connection->selectFromWriteConnection(
+            $this->grammar->compileViewColumnListing(),
+            [$this->connection->getTablePrefix().$name]
+        );
+
+        return $this->connection->getPostProcessor()->processColumnListing($results);
+    }
 }
