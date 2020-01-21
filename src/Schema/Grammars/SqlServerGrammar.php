@@ -39,8 +39,8 @@ class SqlServerGrammar extends Base
      */
     public function compileViewColumnListing()
     {
-        return "select columns.name from sys.columns
-                join sys.objects on objects.object_id = columns.object_id
+        return "select columns.name from sys.columns as columns
+                join sys.objects as objects on objects.object_id = columns.object_id
                 where objects.type = 'V' and objects.name = ?";
     }
 }
