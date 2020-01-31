@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/staudenmeir/laravel-migration-views.svg?branch=master)](https://travis-ci.org/staudenmeir/laravel-migration-views)
+![CI](https://github.com/staudenmeir/laravel-migration-views/workflows/CI/badge.svg)
 [![Code Coverage](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/staudenmeir/laravel-migration-views/v/stable)](https://packagist.org/packages/staudenmeir/laravel-migration-views)
