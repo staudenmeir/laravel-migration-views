@@ -14,6 +14,10 @@ Supports Laravel 5.5.25+.
 
     composer require staudenmeir/laravel-migration-views:"^1.0"
 
+Use this command if you are in PowerShell on Windows (e.g. in VS Code):
+
+    composer require staudenmeir/laravel-migration-views:"^^^^1.0"
+
 ## Usage
 
 - [Creating Views](#creating-views)
