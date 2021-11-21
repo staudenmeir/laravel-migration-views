@@ -15,8 +15,6 @@ jobs:
           - php: 7.4
             release: stable
             coverage: xdebug
-          - database: sqlsrv
-            pdo_suffix: -5.9.0preview1
 
     services:
       mysql:
@@ -57,7 +55,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           tools: pecl
-          extensions: bcmath, ctype, json, mbstring, openssl, pdo, pdo_${{ matrix.database }}${{ matrix.pdo_suffix }}, tokenizer, xml
+          extensions: bcmath, ctype, json, mbstring, openssl, pdo, pdo_${{ matrix.database }}, tokenizer, xml
           coverage: ${{ matrix.coverage }}
       - run: docker exec sqlsrv /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1 -U sa -P Password! -Q "create database [test]"
         if: matrix.database == 'sqlsrv'
