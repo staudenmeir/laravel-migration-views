@@ -16,7 +16,7 @@ class PostgresBuilder extends Base
      */
     protected function getBindingsForHasView($view)
     {
-        [$schema, $view] = $this->parseSchemaAndTable($view);
+        [, $schema, $view] = $this->parseSchemaAndTable($view);
 
         return [$schema, $view];
     }

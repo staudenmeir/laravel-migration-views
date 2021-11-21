@@ -2,14 +2,14 @@
 
 namespace Tests;
 
-use Illuminate\Database\Capsule\Manager as DB;
+use Illuminate\Support\Facades\DB;
 use Staudenmeir\LaravelMigrationViews\Facades\Schema;
 
 class SchemaTest extends TestCase
 {
     public function testCreateView()
     {
-        Schema::connection('default')->createView('active_users', DB::table('users')->where('active', true));
+        Schema::connection('testing')->createView('active_users', DB::table('users')->where('active', true));
 
         $users = DB::table('active_users')->get();
         $this->assertCount(1, $users);
@@ -26,7 +26,7 @@ class SchemaTest extends TestCase
 
     public function testCreateViewWithBooleanBinding()
     {
-        Schema::connection('default')->createView('test', DB::table('users')->where('active', false));
+        Schema::connection('testing')->createView('test', DB::table('users')->where('active', false));
 
         $users = DB::table('test')->get();
         $this->assertCount(1, $users);
@@ -34,13 +34,13 @@ class SchemaTest extends TestCase
 
     public function testCreateViewWithObjectBinding()
     {
-        $object = new class {
+        $object = new class() {
             public function __toString()
             {
                 return "O'Brien";
             }
         };
-        Schema::connection('default')->createView('test', DB::table('users')->where('name', $object));
+        Schema::connection('testing')->createView('test', DB::table('users')->where('name', $object));
 
         $users = DB::table('test')->get();
         $this->assertCount(1, $users);
@@ -48,7 +48,7 @@ class SchemaTest extends TestCase
 
     public function testCreateViewWithStringBinding()
     {
-        Schema::connection('default')->createView('test', DB::table('users')->where('name', "O'Brien"));
+        Schema::connection('testing')->createView('test', DB::table('users')->where('name', "O'Brien"));
 
         $users = DB::table('test')->get();
         $this->assertCount(1, $users);
@@ -104,7 +104,8 @@ class SchemaTest extends TestCase
         Schema::createView('active_users', DB::table('users')->where('active', true));
 
         $columns = Schema::getViewColumnListing('active_users');
+        sort($columns);
 
-        $this->assertSame(['id', 'name', 'active', 'created_at', 'updated_at'], $columns);
+        $this->assertSame(['active', 'created_at', 'id', 'name', 'updated_at'], $columns);
     }
 }

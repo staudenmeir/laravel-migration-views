@@ -39,42 +39,30 @@ class Schema extends Base
     }
 
     /**
-     * Get a schema builder instance for the default connection.
-     *
-     * @return \Illuminate\Database\Schema\Builder
-     */
-    protected static function getFacadeAccessor()
-    {
-        return static::getSchemaBuilder(
-            static::$app['db']->connection()
-        );
-    }
-
-    /**
      * Get the schema builder.
      *
      * @param \Illuminate\Database\Connection $connection
      * @return \Illuminate\Database\Schema\Builder
      */
-    protected static function getSchemaBuilder(Connection $connection)
+    public static function getSchemaBuilder(Connection $connection)
     {
         $driver = $connection->getDriverName();
 
         switch ($driver) {
             case 'mysql':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new MySqlGrammar));
+                $connection->setSchemaGrammar($connection->withTablePrefix(new MySqlGrammar()));
 
                 return new MySqlBuilder($connection);
             case 'pgsql':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new PostgresGrammar));
+                $connection->setSchemaGrammar($connection->withTablePrefix(new PostgresGrammar()));
 
                 return new PostgresBuilder($connection);
             case 'sqlite':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new SQLiteGrammar));
+                $connection->setSchemaGrammar($connection->withTablePrefix(new SQLiteGrammar()));
 
                 return new SQLiteBuilder($connection);
             case 'sqlsrv':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new SqlServerGrammar));
+                $connection->setSchemaGrammar($connection->withTablePrefix(new SqlServerGrammar()));
 
                 return new SqlServerBuilder($connection);
         }
