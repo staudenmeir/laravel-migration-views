@@ -3,7 +3,7 @@
 namespace Staudenmeir\LaravelMigrationViews\Facades;
 
 use Illuminate\Database\Connection;
-use Illuminate\Support\Facades\Schema as Base;
+use Illuminate\Support\Facades\Facade;
 use RuntimeException;
 use Staudenmeir\LaravelMigrationViews\Schema\Builders\MySqlBuilder;
 use Staudenmeir\LaravelMigrationViews\Schema\Builders\PostgresBuilder;
@@ -23,8 +23,18 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
  * @method static bool hasView(string $name)
  * @method static array getViewColumnListing(string $name)
  */
-class Schema extends Base
+class Schema extends Facade
 {
+    /**
+     * Get the registered name of the component.
+     *
+     * @return string
+     */
+    protected static function getFacadeAccessor()
+    {
+        return static::class;
+    }
+
     /**
      * Get a schema builder instance for a connection.
      *
