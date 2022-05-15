@@ -17,7 +17,9 @@ class SchemaTest extends TestCase
 
     public function testCreateViewWithColumns()
     {
-        Schema::createView('active_users', 'select id from users where active = 1', ['key']);
+        $active = Schema::connection('testing')->getConnection()->getDriverName() === 'pgsql' ? 'true' : 1;
+
+        Schema::createView('active_users', "select id from users where active = $active", ['key']);
 
         $users = DB::table('active_users')->get();
         $this->assertCount(1, $users);

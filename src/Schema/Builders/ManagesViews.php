@@ -49,7 +49,22 @@ trait ManagesViews
             return $query;
         }
 
-        $bindings = $this->connection->prepareBindings($query->getBindings());
+        $bindings = $this->stringifyBindings(
+            $query->getBindings()
+        );
+
+        return Str::replaceArray('?', $bindings, $query->toSql());
+    }
+
+    /**
+     * Stringify the query bindings.
+     *
+     * @param array $bindings
+     * @return array
+     */
+    protected function stringifyBindings(array $bindings)
+    {
+        $bindings = $this->connection->prepareBindings($bindings);
 
         foreach ($bindings as &$binding) {
             if (is_object($binding)) {
@@ -61,7 +76,7 @@ trait ManagesViews
             }
         }
 
-        return Str::replaceArray('?', $bindings, $query->toSql());
+        return $bindings;
     }
 
     /**
