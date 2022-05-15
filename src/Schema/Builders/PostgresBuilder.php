@@ -7,7 +7,7 @@ use Illuminate\Database\Schema\PostgresBuilder as Base;
 class PostgresBuilder extends Base
 {
     use ManagesViews {
-        stringifyBindings as parentStringifyBindings;
+        stringifyBindings as baseStringifyBindings;
     }
 
     /**
@@ -24,7 +24,7 @@ class PostgresBuilder extends Base
             }
         }
 
-        return $this->parentStringifyBindings($bindings);
+        return $this->baseStringifyBindings($bindings);
     }
 
     /**
