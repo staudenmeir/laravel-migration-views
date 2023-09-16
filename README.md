@@ -1,11 +1,13 @@
+# Laravel Migration Views
+
+[![CI](https://github.com/staudenmeir/laravel-migration-views/actions/workflows/ci.yml/badge.svg)](https://github.com/staudenmeir/laravel-migration-views/actions/workflows/ci.yml)
 ![CI](https://github.com/staudenmeir/laravel-migration-views/workflows/CI/badge.svg)
 [![Code Coverage](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/staudenmeir/laravel-migration-views/v/stable)](https://packagist.org/packages/staudenmeir/laravel-migration-views)
-[![Total Downloads](https://poser.pugx.org/staudenmeir/laravel-migration-views/downloads)](https://packagist.org/packages/staudenmeir/laravel-migration-views)
-[![License](https://poser.pugx.org/staudenmeir/laravel-migration-views/license)](https://packagist.org/packages/staudenmeir/laravel-migration-views)
+[![Total Downloads](https://poser.pugx.org/staudenmeir/laravel-migration-views/downloads)](https://packagist.org/packages/staudenmeir/laravel-migration-views/stats)
+[![License](https://poser.pugx.org/staudenmeir/laravel-migration-views/license)](https://github.com/staudenmeir/laravel-migration-views/blob/master/LICENSE)
 
-## Introduction
 This Laravel extension adds support for SQL views in database migrations.
 
 Supports Laravel 5.5.25+.
@@ -17,6 +19,18 @@ Supports Laravel 5.5.25+.
 Use this command if you are in PowerShell on Windows (e.g. in VS Code):
 
     composer require staudenmeir/laravel-migration-views:"^^^^1.0"
+
+## Versions
+
+| Laravel | Package |
+|:--------|:--------|
+| 10.x    | 1.7     |
+| 9.x     | 1.6     |
+| 8.x     | 1.5     |
+| 7.x     | 1.4     |
+| 6.x     | 1.2     |
+| 5.8     | 1.1     |
+| 5.5–5.7 | 1.0     |
 
 ## Usage
 
