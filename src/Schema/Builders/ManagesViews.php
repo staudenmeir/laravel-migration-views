@@ -2,8 +2,6 @@
 
 namespace Staudenmeir\LaravelMigrationViews\Schema\Builders;
 
-use Illuminate\Support\Str;
-
 trait ManagesViews
 {
     /**
@@ -49,11 +47,7 @@ trait ManagesViews
             return $query;
         }
 
-        $bindings = $this->stringifyBindings(
-            $query->getBindings()
-        );
-
-        return Str::replaceArray('?', $bindings, $query->toSql());
+        return $query->toRawSql();
     }
 
     /**
