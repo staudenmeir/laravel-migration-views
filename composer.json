@@ -14,8 +14,8 @@
     },
     "require-dev": {
         "orchestra/testbench": "^8.0",
-        "phpunit/phpunit": "^10.1",
-        "phpstan/phpstan": "^1.10"
+        "phpstan/phpstan": "^1.10",
+        "phpunit/phpunit": "^10.1"
     },
     "autoload": {
         "psr-4": {
@@ -35,5 +35,8 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
 }
