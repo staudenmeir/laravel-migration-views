@@ -1,8 +1,7 @@
 # Laravel Migration Views
 
 [![CI](https://github.com/staudenmeir/laravel-migration-views/actions/workflows/ci.yml/badge.svg)](https://github.com/staudenmeir/laravel-migration-views/actions/workflows/ci.yml)
-![CI](https://github.com/staudenmeir/laravel-migration-views/workflows/CI/badge.svg)
-[![Code Coverage](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/?branch=master)
+[![Code Coverage](https://codecov.io/gh/staudenmeir/laravel-migration-views/graph/badge.svg?token=7YD2SRTL64)](https://codecov.io/gh/staudenmeir/laravel-migration-views)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/staudenmeir/laravel-migration-views/v/stable)](https://packagist.org/packages/staudenmeir/laravel-migration-views)
 [![Total Downloads](https://poser.pugx.org/staudenmeir/laravel-migration-views/downloads)](https://packagist.org/packages/staudenmeir/laravel-migration-views/stats)
