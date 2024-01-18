@@ -9,7 +9,7 @@
 
 This Laravel extension adds support for SQL views in database migrations.
 
-Supports Laravel 5.5.25+.
+Supports Laravel 5.5+.
  
 ## Installation
 
