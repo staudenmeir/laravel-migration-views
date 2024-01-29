@@ -36,7 +36,7 @@ class SchemaTest extends TestCase
 
     public function testCreateViewWithObjectBinding()
     {
-        $object = new class() {
+        $object = new class () {
             public function __toString()
             {
                 return "O'Brien";
