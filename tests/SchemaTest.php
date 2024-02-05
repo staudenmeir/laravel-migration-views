@@ -36,7 +36,7 @@ class SchemaTest extends TestCase
 
     public function testCreateViewWithObjectBinding()
     {
-        $object = new class() {
+        $object = new class () {
             public function __toString()
             {
                 return "O'Brien";
@@ -64,6 +64,24 @@ class SchemaTest extends TestCase
 
         $users = DB::table('active_users')->get();
         $this->assertCount(1, $users);
+    }
+
+    public function testCreateMaterializedView()
+    {
+        if ($this->connection !== 'pgsql') {
+            $this->markTestSkipped();
+        }
+
+        Schema::createMaterializedView(
+            'active_users',
+            DB::table('users')->where('active', true)
+        );
+
+        $this->assertDatabaseCount('active_users', 1);
+
+        DB::table('users')->update(['active' => false]);
+
+        $this->assertDatabaseCount('active_users', 1);
     }
 
     public function testRenameView()
@@ -109,5 +127,23 @@ class SchemaTest extends TestCase
         sort($columns);
 
         $this->assertSame(['active', 'created_at', 'id', 'name', 'updated_at'], $columns);
+    }
+
+    public function testRefreshMaterializedView()
+    {
+        if ($this->connection !== 'pgsql') {
+            $this->markTestSkipped();
+        }
+
+        Schema::createMaterializedView(
+            'active_users',
+            DB::table('users')->where('active', true)
+        );
+
+        DB::table('users')->update(['active' => false]);
+
+        Schema::refreshMaterializedView('active_users');
+
+        $this->assertDatabaseCount('active_users', 0);
     }
 }

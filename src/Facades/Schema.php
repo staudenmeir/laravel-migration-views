@@ -17,11 +17,13 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
 /**
  * @method static void createView(string $name, $query, array $columns = null, bool $orReplace = false)
  * @method static void createOrReplaceView(string $name, $query, array $columns = null)
+ * @method static void createMaterializedView(string $name, $query, array $columns = null)
  * @method static void renameView(string $from, string $to)
  * @method static void dropView(string $name, bool $ifExists = false)
  * @method static void dropViewIfExists(string $name)
  * @method static bool hasView(string $name)
  * @method static array getViewColumnListing(string $name)
+ * @method static void refreshMaterializedView(string $name)
  */
 class Schema extends Facade
 {
