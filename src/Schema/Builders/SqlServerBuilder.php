@@ -17,9 +17,10 @@ class SqlServerBuilder extends Base
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
      * @param array|null $columns
      * @param bool $orReplace
+     * @param bool $materialized
      * @return void
      */
-    public function createView($name, $query, array $columns = null, $orReplace = false)
+    public function createView($name, $query, array $columns = null, $orReplace = false, bool $materialized = false)
     {
         if ($orReplace) {
             $this->dropViewIfExists($name);

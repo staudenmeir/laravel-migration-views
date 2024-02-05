@@ -2,6 +2,8 @@
 
 namespace Staudenmeir\LaravelMigrationViews\Schema\Builders;
 
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Str;
 
 trait ManagesViews
@@ -13,14 +15,15 @@ trait ManagesViews
      * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
      * @param array|null $columns
      * @param bool $orReplace
+     * @param bool $materialized
      * @return void
      */
-    public function createView($name, $query, array $columns = null, $orReplace = false)
+    public function createView($name, $query, array $columns = null, $orReplace = false, bool $materialized = false)
     {
         $query = $this->getQueryString($query);
 
         $this->connection->statement(
-            $this->grammar->compileCreateView($name, $query, $columns, $orReplace)
+            $this->grammar->compileCreateView($name, $query, $columns, $orReplace, $materialized)
         );
     }
 
@@ -35,6 +38,19 @@ trait ManagesViews
     public function createOrReplaceView($name, $query, array $columns = null)
     {
         $this->createView($name, $query, $columns, true);
+    }
+
+    /**
+     * Create a new materialized view on the schema.
+     *
+     * @param string $name
+     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
+     * @param array|null $columns
+     * @return void
+     */
+    public function createMaterializedView(string $name, EloquentBuilder|QueryBuilder $query, array $columns = null): void
+    {
+        $this->createView($name, $query, $columns, materialized: true);
     }
 
     /**
@@ -154,5 +170,18 @@ trait ManagesViews
     public function getViewColumnListing($name)
     {
         return $this->getColumnListing($name);
+    }
+
+    /**
+     * Refresh a materialized view on the schema.
+     *
+     * @param string $name
+     * @return void
+     */
+    public function refreshMaterializedView(string $name): void
+    {
+        $this->connection->statement(
+            $this->grammar->compileRefreshMaterializedView($name)
+        );
     }
 }
