@@ -45,17 +45,6 @@ class SqlServerBuilder extends Base
     }
 
     /**
-     * Get the bindings for a "Has View" statement.
-     *
-     * @param string $view
-     * @return array
-     */
-    protected function getBindingsForHasView($view)
-    {
-        return [$view];
-    }
-
-    /**
      * Get the column listing for a given view.
      *
      * @param string $name
@@ -68,6 +57,6 @@ class SqlServerBuilder extends Base
             [$this->connection->getTablePrefix().$name]
         );
 
-        return $this->connection->getPostProcessor()->processColumnListing($results);
+        return array_map(fn ($result) => ((object) $result)->name, $results);
     }
 }

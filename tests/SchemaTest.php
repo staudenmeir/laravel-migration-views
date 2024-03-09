@@ -110,15 +110,6 @@ class SchemaTest extends TestCase
         $this->assertFalse(Schema::hasView('active_users'));
     }
 
-    public function testHasView()
-    {
-        $this->assertFalse(Schema::hasView('active_users'));
-
-        Schema::createView('active_users', DB::table('users')->where('active', true));
-
-        $this->assertTrue(Schema::hasView('active_users'));
-    }
-
     public function testGetViewColumnListing()
     {
         Schema::createView('active_users', DB::table('users')->where('active', true));

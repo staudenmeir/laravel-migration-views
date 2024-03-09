@@ -26,17 +26,4 @@ class PostgresBuilder extends Base
 
         return $this->baseStringifyBindings($bindings);
     }
-
-    /**
-     * Get the bindings for a "Has View" statement.
-     *
-     * @param string $view
-     * @return array
-     */
-    protected function getBindingsForHasView($view)
-    {
-        [, $schema, $view] = $this->parseSchemaAndTable($view);
-
-        return [$schema, $view];
-    }
 }

@@ -54,15 +54,4 @@ class SQLiteBuilder extends Base
 
         $this->connection->statement($query);
     }
-
-    /**
-     * Get the bindings for a "Has View" statement.
-     *
-     * @param string $view
-     * @return array
-     */
-    protected function getBindingsForHasView($view)
-    {
-        return [$view];
-    }
 }

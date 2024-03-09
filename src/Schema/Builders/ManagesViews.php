@@ -133,35 +133,6 @@ trait ManagesViews
     }
 
     /**
-     * Determine if the given view exists on the schema.
-     *
-     * @param string $name
-     * @return bool
-     */
-    public function hasView($name)
-    {
-        $view = $this->connection->getTablePrefix().$name;
-
-        $view = $this->connection->selectOne(
-            $this->grammar->compileViewExists(),
-            $this->getBindingsForHasView($view)
-        );
-
-        return !is_null($view);
-    }
-
-    /**
-     * Get the bindings for a "Has View" statement.
-     *
-     * @param string $view
-     * @return array
-     */
-    protected function getBindingsForHasView($view)
-    {
-        return [$this->connection->getDatabaseName(), $view];
-    }
-
-    /**
      * Get the column listing for a given view.
      *
      * @param string $name
