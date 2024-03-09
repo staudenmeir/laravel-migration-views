@@ -40,16 +40,6 @@ trait CompilesViews
     }
 
     /**
-     * Compile the query to determine if a view exists.
-     *
-     * @return string
-     */
-    public function compileViewExists()
-    {
-        return 'select * from information_schema.views where table_schema = ? and table_name = ?';
-    }
-
-    /**
      * Compile the query to refresh a materialized view.
      *
      * @param string $name
