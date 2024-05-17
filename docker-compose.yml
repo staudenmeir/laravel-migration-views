@@ -27,6 +27,13 @@ services:
       retries: 10
     networks:
       - test
+  mariadb:
+    image: 'mariadb:latest'
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: test
+    networks:
+      - test
   pgsql:
     image: 'postgres:latest'
     environment:

@@ -5,10 +5,12 @@ namespace Staudenmeir\LaravelMigrationViews\Facades;
 use Illuminate\Database\Connection;
 use Illuminate\Support\Facades\Facade;
 use RuntimeException;
+use Staudenmeir\LaravelMigrationViews\Schema\Builders\MariaDbBuilder;
 use Staudenmeir\LaravelMigrationViews\Schema\Builders\MySqlBuilder;
 use Staudenmeir\LaravelMigrationViews\Schema\Builders\PostgresBuilder;
 use Staudenmeir\LaravelMigrationViews\Schema\Builders\SQLiteBuilder;
 use Staudenmeir\LaravelMigrationViews\Schema\Builders\SqlServerBuilder;
+use Staudenmeir\LaravelMigrationViews\Schema\Grammars\MariaDbGrammar;
 use Staudenmeir\LaravelMigrationViews\Schema\Grammars\MySqlGrammar;
 use Staudenmeir\LaravelMigrationViews\Schema\Grammars\PostgresGrammar;
 use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SQLiteGrammar;
@@ -64,6 +66,10 @@ class Schema extends Facade
                 $connection->setSchemaGrammar($connection->withTablePrefix(new MySqlGrammar()));
 
                 return new MySqlBuilder($connection);
+            case 'mariadb':
+                $connection->setSchemaGrammar($connection->withTablePrefix(new MariaDbGrammar()));
+
+                return new MariaDbBuilder($connection);
             case 'pgsql':
                 $connection->setSchemaGrammar($connection->withTablePrefix(new PostgresGrammar()));
 
