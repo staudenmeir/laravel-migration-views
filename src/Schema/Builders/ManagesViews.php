@@ -18,7 +18,7 @@ trait ManagesViews
      * @param bool $materialized
      * @return void
      */
-    public function createView($name, $query, array $columns = null, $orReplace = false, bool $materialized = false)
+    public function createView($name, $query, ?array $columns = null, $orReplace = false, bool $materialized = false)
     {
         $query = $this->getQueryString($query);
 
@@ -35,7 +35,7 @@ trait ManagesViews
      * @param array|null $columns
      * @return void
      */
-    public function createOrReplaceView($name, $query, array $columns = null)
+    public function createOrReplaceView($name, $query, ?array $columns = null)
     {
         $this->createView($name, $query, $columns, true);
     }
@@ -48,7 +48,7 @@ trait ManagesViews
      * @param array|null $columns
      * @return void
      */
-    public function createMaterializedView(string $name, EloquentBuilder|QueryBuilder $query, array $columns = null): void
+    public function createMaterializedView(string $name, EloquentBuilder|QueryBuilder $query, ?array $columns = null): void
     {
         $this->createView($name, $query, $columns, materialized: true);
     }

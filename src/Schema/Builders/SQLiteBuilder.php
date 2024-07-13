@@ -21,7 +21,7 @@ class SQLiteBuilder extends Base
      * @param bool $materialized
      * @return void
      */
-    public function createView($name, $query, array $columns = null, $orReplace = false, bool $materialized = false)
+    public function createView($name, $query, ?array $columns = null, $orReplace = false, bool $materialized = false)
     {
         if ($orReplace) {
             $this->dropViewIfExists($name);
