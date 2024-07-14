@@ -2,10 +2,10 @@
 
 [![CI](https://github.com/staudenmeir/laravel-migration-views/actions/workflows/ci.yml/badge.svg)](https://github.com/staudenmeir/laravel-migration-views/actions/workflows/ci.yml)
 [![Code Coverage](https://codecov.io/gh/staudenmeir/laravel-migration-views/graph/badge.svg?token=7YD2SRTL64)](https://codecov.io/gh/staudenmeir/laravel-migration-views)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/staudenmeir/laravel-migration-views/?branch=main)
 [![Latest Stable Version](https://poser.pugx.org/staudenmeir/laravel-migration-views/v/stable)](https://packagist.org/packages/staudenmeir/laravel-migration-views)
 [![Total Downloads](https://poser.pugx.org/staudenmeir/laravel-migration-views/downloads)](https://packagist.org/packages/staudenmeir/laravel-migration-views/stats)
-[![License](https://poser.pugx.org/staudenmeir/laravel-migration-views/license)](https://github.com/staudenmeir/laravel-migration-views/blob/master/LICENSE)
+[![License](https://poser.pugx.org/staudenmeir/laravel-migration-views/license)](https://github.com/staudenmeir/laravel-migration-views/blob/main/LICENSE)
 
 This Laravel extension adds support for SQL views in database migrations.
 
