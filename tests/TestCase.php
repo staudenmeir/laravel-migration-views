@@ -32,8 +32,8 @@ abstract class TestCase extends Base
 
         Model::unguard();
 
-        User::create(['name' => 'Doe', 'active' => 1]);
-        User::create(['name' => "O'Brien", 'active' => 0]);
+        User::query()->create(['name' => 'Doe', 'active' => 1]);
+        User::query()->create(['name' => "O'Brien", 'active' => 0]);
 
         Model::reguard();
     }

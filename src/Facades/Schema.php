@@ -25,6 +25,8 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
  * @method static void dropViewIfExists(string $name)
  * @method static array getViewColumnListing(string $name)
  * @method static void refreshMaterializedView(string $name)
+ *
+ * @mixin \Illuminate\Support\Facades\Schema
  */
 class Schema extends Facade
 {
