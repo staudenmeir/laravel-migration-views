@@ -10,16 +10,7 @@ class SqlServerBuilder extends Base
         createView as createViewParent;
     }
 
-    /**
-     * Create a new view on the schema.
-     *
-     * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
-     * @param bool $orReplace
-     * @param bool $materialized
-     * @return void
-     */
+    /** @inheritDoc */
     public function createView($name, $query, ?array $columns = null, $orReplace = false, bool $materialized = false)
     {
         if ($orReplace) {
@@ -29,31 +20,26 @@ class SqlServerBuilder extends Base
         $this->createViewParent($name, $query, $columns);
     }
 
-    /**
-     * Drop a view from the schema.
-     *
-     * @param string $name
-     * @param bool $ifExists
-     * @return void
-     */
+    /** @inheritDoc */
     public function dropView($name, $ifExists = false)
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
+        $grammar = $this->grammar;
+
         $this->connection->statement(
-            $this->grammar->compileDropView($name, $ifExists),
+            $grammar->compileDropView($name, $ifExists),
             $ifExists ? [$this->connection->getTablePrefix().$name] : []
         );
     }
 
-    /**
-     * Get the column listing for a given view.
-     *
-     * @param string $name
-     * @return array
-     */
+    /** @inheritDoc */
     public function getViewColumnListing($name)
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar $grammar */
+        $grammar = $this->grammar;
+
         $results = $this->connection->selectFromWriteConnection(
-            $this->grammar->compileViewColumnListing(),
+            $grammar->compileViewColumnListing(),
             [$this->connection->getTablePrefix().$name]
         );
 

@@ -30,11 +30,7 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
  */
 class Schema extends Facade
 {
-    /**
-     * Get the registered name of the component.
-     *
-     * @return string
-     */
+    /** @inheritDoc */
     protected static function getFacadeAccessor()
     {
         return static::class;

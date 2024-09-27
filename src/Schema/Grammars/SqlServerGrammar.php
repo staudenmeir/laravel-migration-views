@@ -4,17 +4,11 @@ namespace Staudenmeir\LaravelMigrationViews\Schema\Grammars;
 
 use Illuminate\Database\Schema\Grammars\SqlServerGrammar as Base;
 
-class SqlServerGrammar extends Base
+class SqlServerGrammar extends Base implements ViewGrammar
 {
     use CompilesViews;
 
-    /**
-     * Compile the query to drop a view.
-     *
-     * @param string $name
-     * @param bool $ifExists
-     * @return string
-     */
+    /** @inheritDoc */
     public function compileDropView($name, $ifExists)
     {
         $ifExists = $ifExists ? 'if exists ('.$this->compileViewExists().') ' : '';

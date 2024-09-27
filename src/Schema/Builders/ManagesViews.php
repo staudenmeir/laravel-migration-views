@@ -20,10 +20,13 @@ trait ManagesViews
      */
     public function createView($name, $query, ?array $columns = null, $orReplace = false, bool $materialized = false)
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
+        $grammar = $this->grammar;
+
         $query = $this->getQueryString($query);
 
         $this->connection->statement(
-            $this->grammar->compileCreateView($name, $query, $columns, $orReplace, $materialized)
+            $grammar->compileCreateView($name, $query, $columns, $orReplace, $materialized)
         );
     }
 
@@ -48,7 +51,7 @@ trait ManagesViews
      * @param array|null $columns
      * @return void
      */
-    public function createMaterializedView(string $name, EloquentBuilder|QueryBuilder $query, ?array $columns = null): void
+    public function createMaterializedView(string $name, $query, ?array $columns = null): void
     {
         $this->createView($name, $query, $columns, materialized: true);
     }
@@ -116,8 +119,11 @@ trait ManagesViews
      */
     public function dropView($name, $ifExists = false)
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
+        $grammar = $this->grammar;
+
         $this->connection->statement(
-            $this->grammar->compileDropView($name, $ifExists)
+            $grammar->compileDropView($name, $ifExists)
         );
     }
 
@@ -151,8 +157,11 @@ trait ManagesViews
      */
     public function refreshMaterializedView(string $name): void
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
+        $grammar = $this->grammar;
+
         $this->connection->statement(
-            $this->grammar->compileRefreshMaterializedView($name)
+            $grammar->compileRefreshMaterializedView($name)
         );
     }
 }
