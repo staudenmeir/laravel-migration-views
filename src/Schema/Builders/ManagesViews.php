@@ -2,9 +2,8 @@
 
 namespace Staudenmeir\LaravelMigrationViews\Schema\Builders;
 
-use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Str;
+use Stringable;
 
 trait ManagesViews
 {
@@ -86,7 +85,7 @@ trait ManagesViews
         $bindings = $this->connection->prepareBindings($bindings);
 
         foreach ($bindings as $key => $binding) {
-            if (is_object($binding)) {
+            if ($binding instanceof Stringable) {
                 $binding = (string) $binding;
             }
 

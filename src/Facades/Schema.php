@@ -44,8 +44,11 @@ class Schema extends Facade
      */
     public static function connection($name)
     {
+        /** @var array{db: \Illuminate\Database\DatabaseManager} $app */
+        $app = static::$app;
+
         return static::getSchemaBuilder(
-            static::$app['db']->connection($name)
+            $app['db']->connection($name)
         );
     }
 
