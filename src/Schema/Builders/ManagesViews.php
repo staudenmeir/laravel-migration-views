@@ -82,13 +82,13 @@ trait ManagesViews
     {
         $bindings = $this->connection->prepareBindings($bindings);
 
-        foreach ($bindings as &$binding) {
+        foreach ($bindings as $key => $binding) {
             if (is_object($binding)) {
                 $binding = (string) $binding;
             }
 
             if (is_string($binding)) {
-                $binding = $this->connection->getPdo()->quote($binding);
+                $bindings[$key] = $this->connection->getPdo()->quote($binding);
             }
         }
 

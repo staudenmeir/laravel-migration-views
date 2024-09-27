@@ -61,31 +61,33 @@ class Schema extends Facade
      */
     public static function getSchemaBuilder(Connection $connection)
     {
-        $driver = $connection->getDriverName();
-
-        switch ($driver) {
-            case 'mysql':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new MySqlGrammar()));
-
-                return new MySqlBuilder($connection);
-            case 'mariadb':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new MariaDbGrammar()));
-
-                return new MariaDbBuilder($connection);
-            case 'pgsql':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new PostgresGrammar()));
-
-                return new PostgresBuilder($connection);
-            case 'sqlite':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new SQLiteGrammar()));
-
-                return new SQLiteBuilder($connection);
-            case 'sqlsrv':
-                $connection->setSchemaGrammar($connection->withTablePrefix(new SqlServerGrammar()));
-
-                return new SqlServerBuilder($connection);
-        }
-
-        throw new RuntimeException('This database is not supported.'); // @codeCoverageIgnore
+        return match ($connection->getDriverName()) {
+            'mysql' => new MySqlBuilder(
+                $connection->setSchemaGrammar(
+                    $connection->withTablePrefix(new MySqlGrammar())
+                )
+            ),
+            'mariadb' => new MariaDbBuilder(
+                $connection->setSchemaGrammar(
+                    $connection->withTablePrefix(new MariaDbGrammar())
+                )
+            ),
+            'pgsql' => new PostgresBuilder(
+                $connection->setSchemaGrammar(
+                    $connection->withTablePrefix(new PostgresGrammar())
+                )
+            ),
+            'sqlite' => new SQLiteBuilder(
+                $connection->setSchemaGrammar(
+                    $connection->withTablePrefix(new SQLiteGrammar())
+                )
+            ),
+            'sqlsrv' => new SqlServerBuilder(
+                $connection->setSchemaGrammar(
+                    $connection->withTablePrefix(new SqlServerGrammar())
+                )
+            ),
+            default => throw new RuntimeException('This database is not supported.'), // @codeCoverageIgnore
+        };
     }
 }

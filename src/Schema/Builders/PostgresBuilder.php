@@ -18,9 +18,9 @@ class PostgresBuilder extends Base
      */
     protected function stringifyBindings(array $bindings)
     {
-        foreach ($bindings as &$binding) {
+        foreach ($bindings as $key => $binding) {
             if (is_bool($binding)) {
-                $binding = $binding ? 'true' : 'false';
+                $bindings[$key] = $binding ? 'true' : 'false';
             }
         }
 
