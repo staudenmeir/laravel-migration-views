@@ -39,6 +39,7 @@ class SQLiteBuilder extends Base
      */
     public function renameView($from, $to)
     {
+        /** @var object{sql: string} $view */
         $view = $this->connection->selectOne(
             "select * from sqlite_master where type = 'view' and name = ?",
             [$this->connection->getTablePrefix().$from]
