@@ -12,8 +12,8 @@ trait ManagesViews
      * Create a new view on the schema.
      *
      * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @return void
@@ -34,8 +34,8 @@ trait ManagesViews
      * Create a new view on the schema or replace an existing one.
      *
      * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @return void
      */
     public function createOrReplaceView($name, $query, ?array $columns = null)
@@ -47,8 +47,8 @@ trait ManagesViews
      * Create a new materialized view on the schema.
      *
      * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @return void
      */
     public function createMaterializedView(string $name, $query, ?array $columns = null): void
@@ -59,7 +59,7 @@ trait ManagesViews
     /**
      * Convert the query and its bindings to an SQL string.
      *
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
      * @return string
      */
     protected function getQueryString($query)
@@ -78,8 +78,8 @@ trait ManagesViews
     /**
      * Stringify the query bindings.
      *
-     * @param array $bindings
-     * @return array
+     * @param array<string, mixed> $bindings
+     * @return array<string, mixed>
      */
     protected function stringifyBindings(array $bindings)
     {
@@ -142,7 +142,7 @@ trait ManagesViews
      * Get the column listing for a given view.
      *
      * @param string $name
-     * @return array
+     * @return list<string>
      */
     public function getViewColumnListing($name)
     {

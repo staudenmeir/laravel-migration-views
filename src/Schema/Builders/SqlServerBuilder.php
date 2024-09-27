@@ -10,7 +10,16 @@ class SqlServerBuilder extends Base
         createView as createViewParent;
     }
 
-    /** @inheritDoc */
+    /**
+     * Create a new view on the schema.
+     *
+     * @param string $name
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param bool $orReplace
+     * @param bool $materialized
+     * @return void
+     */
     public function createView($name, $query, ?array $columns = null, $orReplace = false, bool $materialized = false)
     {
         if ($orReplace) {
@@ -20,7 +29,13 @@ class SqlServerBuilder extends Base
         $this->createViewParent($name, $query, $columns);
     }
 
-    /** @inheritDoc */
+    /**
+     * Drop a view from the schema.
+     *
+     * @param string $name
+     * @param bool $ifExists
+     * @return void
+     */
     public function dropView($name, $ifExists = false)
     {
         /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
@@ -32,7 +47,12 @@ class SqlServerBuilder extends Base
         );
     }
 
-    /** @inheritDoc */
+    /**
+     * Get the column listing for a given view.
+     *
+     * @param string $name
+     * @return list<string>
+     */
     public function getViewColumnListing($name)
     {
         /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar $grammar */

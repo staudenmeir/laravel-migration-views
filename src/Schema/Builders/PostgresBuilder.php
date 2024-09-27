@@ -10,7 +10,12 @@ class PostgresBuilder extends Base
         stringifyBindings as baseStringifyBindings;
     }
 
-    /** @inheritDoc */
+    /**
+     * Stringify the query bindings.
+     *
+     * @param array<string, mixed> $bindings
+     * @return array<string, mixed>
+     */
     protected function stringifyBindings(array $bindings)
     {
         foreach ($bindings as $key => $binding) {

@@ -11,7 +11,16 @@ class SQLiteBuilder extends Base
         createView as createViewParent;
     }
 
-    /** @inheritDoc */
+    /**
+     * Create a new view on the schema.
+     *
+     * @param string $name
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param bool $orReplace
+     * @param bool $materialized
+     * @return void
+     */
     public function createView($name, $query, ?array $columns = null, $orReplace = false, bool $materialized = false)
     {
         if ($orReplace) {
@@ -21,7 +30,13 @@ class SQLiteBuilder extends Base
         $this->createViewParent($name, $query, $columns);
     }
 
-    /** @inheritDoc */
+    /**
+     * Rename a view on the schema.
+     *
+     * @param string $from
+     * @param string $to
+     * @return void
+     */
     public function renameView($from, $to)
     {
         $view = $this->connection->selectOne(
