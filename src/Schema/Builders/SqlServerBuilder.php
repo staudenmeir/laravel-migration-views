@@ -14,8 +14,8 @@ class SqlServerBuilder extends Base
      * Create a new view on the schema.
      *
      * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @return void
@@ -38,8 +38,11 @@ class SqlServerBuilder extends Base
      */
     public function dropView($name, $ifExists = false)
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
+        $grammar = $this->grammar;
+
         $this->connection->statement(
-            $this->grammar->compileDropView($name, $ifExists),
+            $grammar->compileDropView($name, $ifExists),
             $ifExists ? [$this->connection->getTablePrefix().$name] : []
         );
     }
@@ -48,12 +51,15 @@ class SqlServerBuilder extends Base
      * Get the column listing for a given view.
      *
      * @param string $name
-     * @return array
+     * @return list<string>
      */
     public function getViewColumnListing($name)
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar $grammar */
+        $grammar = $this->grammar;
+
         $results = $this->connection->selectFromWriteConnection(
-            $this->grammar->compileViewColumnListing(),
+            $grammar->compileViewColumnListing(),
             [$this->connection->getTablePrefix().$name]
         );
 

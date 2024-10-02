@@ -2,9 +2,8 @@
 
 namespace Staudenmeir\LaravelMigrationViews\Schema\Builders;
 
-use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
-use Illuminate\Database\Query\Builder as QueryBuilder;
 use Illuminate\Support\Str;
+use Stringable;
 
 trait ManagesViews
 {
@@ -12,18 +11,21 @@ trait ManagesViews
      * Create a new view on the schema.
      *
      * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @return void
      */
     public function createView($name, $query, ?array $columns = null, $orReplace = false, bool $materialized = false)
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
+        $grammar = $this->grammar;
+
         $query = $this->getQueryString($query);
 
         $this->connection->statement(
-            $this->grammar->compileCreateView($name, $query, $columns, $orReplace, $materialized)
+            $grammar->compileCreateView($name, $query, $columns, $orReplace, $materialized)
         );
     }
 
@@ -31,8 +33,8 @@ trait ManagesViews
      * Create a new view on the schema or replace an existing one.
      *
      * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @return void
      */
     public function createOrReplaceView($name, $query, ?array $columns = null)
@@ -44,11 +46,11 @@ trait ManagesViews
      * Create a new materialized view on the schema.
      *
      * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @return void
      */
-    public function createMaterializedView(string $name, EloquentBuilder|QueryBuilder $query, ?array $columns = null): void
+    public function createMaterializedView(string $name, $query, ?array $columns = null): void
     {
         $this->createView($name, $query, $columns, materialized: true);
     }
@@ -56,7 +58,7 @@ trait ManagesViews
     /**
      * Convert the query and its bindings to an SQL string.
      *
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
      * @return string
      */
     protected function getQueryString($query)
@@ -75,15 +77,15 @@ trait ManagesViews
     /**
      * Stringify the query bindings.
      *
-     * @param array $bindings
-     * @return array
+     * @param array<string, mixed> $bindings
+     * @return list<string>
      */
     protected function stringifyBindings(array $bindings)
     {
         $bindings = $this->connection->prepareBindings($bindings);
 
         foreach ($bindings as $key => $binding) {
-            if (is_object($binding)) {
+            if ($binding instanceof Stringable) {
                 $binding = (string) $binding;
             }
 
@@ -116,8 +118,11 @@ trait ManagesViews
      */
     public function dropView($name, $ifExists = false)
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
+        $grammar = $this->grammar;
+
         $this->connection->statement(
-            $this->grammar->compileDropView($name, $ifExists)
+            $grammar->compileDropView($name, $ifExists)
         );
     }
 
@@ -136,7 +141,7 @@ trait ManagesViews
      * Get the column listing for a given view.
      *
      * @param string $name
-     * @return array
+     * @return list<string>
      */
     public function getViewColumnListing($name)
     {
@@ -151,8 +156,11 @@ trait ManagesViews
      */
     public function refreshMaterializedView(string $name): void
     {
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
+        $grammar = $this->grammar;
+
         $this->connection->statement(
-            $this->grammar->compileRefreshMaterializedView($name)
+            $grammar->compileRefreshMaterializedView($name)
         );
     }
 }

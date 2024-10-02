@@ -9,7 +9,7 @@ trait CompilesViews
      *
      * @param string $name
      * @param string $query
-     * @param array|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @return string

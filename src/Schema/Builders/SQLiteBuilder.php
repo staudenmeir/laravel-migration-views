@@ -15,8 +15,8 @@ class SQLiteBuilder extends Base
      * Create a new view on the schema.
      *
      * @param string $name
-     * @param \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|string $query
-     * @param array|null $columns
+     * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
+     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @return void
@@ -39,6 +39,7 @@ class SQLiteBuilder extends Base
      */
     public function renameView($from, $to)
     {
+        /** @var object{sql: string} $view */
         $view = $this->connection->selectOne(
             "select * from sqlite_master where type = 'view' and name = ?",
             [$this->connection->getTablePrefix().$from]

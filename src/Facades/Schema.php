@@ -30,11 +30,7 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
  */
 class Schema extends Facade
 {
-    /**
-     * Get the registered name of the component.
-     *
-     * @return string
-     */
+    /** @inheritDoc */
     protected static function getFacadeAccessor()
     {
         return static::class;
@@ -48,8 +44,11 @@ class Schema extends Facade
      */
     public static function connection($name)
     {
+        /** @var array{db: \Illuminate\Database\DatabaseManager} $app */
+        $app = static::$app;
+
         return static::getSchemaBuilder(
-            static::$app['db']->connection($name)
+            $app['db']->connection($name)
         );
     }
 
