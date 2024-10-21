@@ -73,6 +73,18 @@ $query = DB::table('users')->where('active', true);
 Schema::createOrReplaceView('active_users', $query);
 ```
 
+#### View Processing Algorithm
+
+On MySQL and MariaDB, you can specify the view processing algorithm:
+
+```php
+use Staudenmeir\LaravelMigrationViews\Facades\Schema;
+
+$query = DB::table('users')->where('active', true);
+
+Schema::createView('active_users', $query, algorithm: 'TEMPTABLE');
+```
+
 ### Renaming Views
 
 Use `renameView()` to rename a view:
