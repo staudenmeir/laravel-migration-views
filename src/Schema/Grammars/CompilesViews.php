@@ -18,7 +18,7 @@ trait CompilesViews
     {
         $orReplaceSql = $orReplace ? 'or replace ' : '';
 
-        $materializedSql = $materialized ? 'materialized ' : '';
+        $materializedSql = $this->compileMaterializedSql($materialized);
 
         $columns = $columns ? '('.$this->columnize($columns).') ' : '';
 
@@ -48,5 +48,10 @@ trait CompilesViews
     public function compileRefreshMaterializedView(string $name): string
     {
         return 'refresh materialized view ' . $this->wrapTable($name);
+    }
+
+    protected function compileMaterializedSql(bool $materialized = false)
+    {
+        return $materialized ? 'materialized ' : '';
     }
 }
