@@ -17,7 +17,7 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SQLiteGrammar;
 use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
 
 /**
- * @method static void createView(string $name, $query, array $columns = null, bool $orReplace = false)
+ * @method static void createView(string $name, $query, array $columns = null, bool $orReplace = false, ?string $algorithm = null)
  * @method static void createOrReplaceView(string $name, $query, array $columns = null)
  * @method static void createMaterializedView(string $name, $query, array $columns = null)
  * @method static void renameView(string $from, string $to)

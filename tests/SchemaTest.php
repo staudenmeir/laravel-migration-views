@@ -56,6 +56,23 @@ class SchemaTest extends TestCase
         $this->assertCount(1, $users);
     }
 
+    public function testCreateViewWithAlgorithm()
+    {
+        if (!in_array($this->connection, ['mysql', 'mariadb'])) {
+            $this->markTestSkipped();
+        }
+
+        DB::enableQueryLog();
+
+        Schema::connection('testing')->createView(
+            'active_users',
+            DB::table('users')->where('active', true),
+            algorithm: 'temptable'
+        );
+
+        $this->assertStringContainsString('algorithm = temptable', DB::getQueryLog()[0]['query']);
+    }
+
     public function testCreateOrReplaceView()
     {
         Schema::createView('active_users', DB::table('users'));

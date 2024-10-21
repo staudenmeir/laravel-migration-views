@@ -15,17 +15,24 @@ trait ManagesViews
      * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
+     * @param string|null $algorithm
      * @return void
      */
-    public function createView($name, $query, ?array $columns = null, $orReplace = false, bool $materialized = false)
-    {
+    public function createView(
+        $name,
+        $query,
+        ?array $columns = null,
+        $orReplace = false,
+        bool $materialized = false,
+        ?string $algorithm = null
+    ) {
         /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
         $grammar = $this->grammar;
 
         $query = $this->getQueryString($query);
 
         $this->connection->statement(
-            $grammar->compileCreateView($name, $query, $columns, $orReplace, $materialized)
+            $grammar->compileCreateView($name, $query, $columns, $orReplace, $materialized, $algorithm)
         );
     }
 

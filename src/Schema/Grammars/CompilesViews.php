@@ -12,13 +12,14 @@ trait CompilesViews
      * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
+     * @param string|null $algorithm
      * @return string
      */
-    public function compileCreateView($name, $query, $columns, $orReplace, bool $materialized = false)
+    public function compileCreateView($name, $query, $columns, $orReplace, bool $materialized = false, ?string $algorithm = null)
     {
         $orReplaceSql = $orReplace ? 'or replace ' : '';
 
-        $materializedSql = $this->compileMaterializedSql($materialized);
+        $materializedSql = $materialized ? 'materialized ' : '';
 
         $columns = $columns ? '('.$this->columnize($columns).') ' : '';
 
@@ -48,10 +49,5 @@ trait CompilesViews
     public function compileRefreshMaterializedView(string $name): string
     {
         return 'refresh materialized view ' . $this->wrapTable($name);
-    }
-
-    protected function compileMaterializedSql(bool $materialized = false)
-    {
-        return $materialized ? 'materialized ' : '';
     }
 }

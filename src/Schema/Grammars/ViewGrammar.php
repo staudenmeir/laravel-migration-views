@@ -12,9 +12,10 @@ interface ViewGrammar
      * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
+     * @param string|null $algorithm
      * @return string
      */
-    public function compileCreateView($name, $query, $columns, $orReplace, bool $materialized = false);
+    public function compileCreateView($name, $query, $columns, $orReplace, bool $materialized = false, ?string $algorithm = null);
 
     /**
      * Compile the query to drop a view.
