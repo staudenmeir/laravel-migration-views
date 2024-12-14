@@ -58,6 +58,7 @@ class SqlServerBuilder extends Base
         /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar $grammar */
         $grammar = $this->grammar;
 
+        /** @var list<array{name: string}> $results */
         $results = $this->connection->selectFromWriteConnection(
             $grammar->compileViewColumnListing(),
             [$this->connection->getTablePrefix().$name]

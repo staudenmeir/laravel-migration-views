@@ -13,8 +13,9 @@
         "illuminate/database": "^11.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^9.0",
-        "phpstan/phpstan": "^1.10",
+        "laravel/framework": "^11.0",
+        "orchestra/testbench-core": "^9.5",
+        "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^11.0"
     },
     "autoload": {
