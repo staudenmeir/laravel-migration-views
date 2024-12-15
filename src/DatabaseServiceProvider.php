@@ -15,6 +15,8 @@ class DatabaseServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(Schema::class, function ($app) {
+            /** @var array{db: \Illuminate\Database\DatabaseManager} $app */
+
             return Schema::getSchemaBuilder(
                 $app['db']->connection()
             );

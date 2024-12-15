@@ -14,7 +14,7 @@ class PostgresBuilder extends Base
      * Stringify the query bindings.
      *
      * @param array<string, mixed> $bindings
-     * @return list<string>
+     * @return array<string, string>
      */
     protected function stringifyBindings(array $bindings)
     {

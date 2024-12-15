@@ -74,9 +74,10 @@ trait ManagesViews
             return $query;
         }
 
-        $bindings = $this->stringifyBindings(
-            $query->getBindings()
-        );
+        /** @var array<string, mixed> $bindings */
+        $bindings = $query->getBindings();
+
+        $bindings = $this->stringifyBindings($bindings);
 
         return Str::replaceArray('?', $bindings, $query->toSql());
     }
@@ -84,24 +85,25 @@ trait ManagesViews
     /**
      * Stringify the query bindings.
      *
-     * @param array<string, mixed> $bindings
-     * @return list<string>
+     * @param array<string, mixed> $preparedBindings
+     * @return array<string, string>
      */
-    protected function stringifyBindings(array $bindings)
+    protected function stringifyBindings(array $preparedBindings)
     {
-        $bindings = $this->connection->prepareBindings($bindings);
+        $stringifiedBindings = [];
 
-        foreach ($bindings as $key => $binding) {
+        /** @var array<string, float|int|string|\Stringable> $preparedBindings */
+        $preparedBindings = $this->connection->prepareBindings($preparedBindings);
+
+        foreach ($preparedBindings as $key => $binding) {
             if ($binding instanceof Stringable) {
                 $binding = (string) $binding;
             }
 
-            if (is_string($binding)) {
-                $bindings[$key] = $this->connection->getPdo()->quote($binding);
-            }
+            $stringifiedBindings[$key] = $this->connection->getPdo()->quote((string) $binding);
         }
 
-        return $bindings;
+        return $stringifiedBindings;
     }
 
     /**
@@ -152,7 +154,10 @@ trait ManagesViews
      */
     public function getViewColumnListing($name)
     {
-        return $this->getColumnListing($name);
+        /** @var list<string> $list */
+        $list = $this->getColumnListing($name);
+
+        return $list;
     }
 
     /**

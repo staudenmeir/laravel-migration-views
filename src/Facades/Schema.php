@@ -17,13 +17,13 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SQLiteGrammar;
 use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
 
 /**
- * @method static void createView(string $name, $query, array $columns = null, bool $orReplace = false, ?string $algorithm = null)
- * @method static void createOrReplaceView(string $name, $query, array $columns = null)
- * @method static void createMaterializedView(string $name, $query, array $columns = null)
+ * @method static void createView(string $name, string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query, list<string|\Illuminate\Database\Query\Expression>|null $columns = null, bool $orReplace = false, ?string $algorithm = null)
+ * @method static void createOrReplaceView(string $name, string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query, list<string|\Illuminate\Database\Query\Expression>|null $columns = null)
+ * @method static void createMaterializedView(string $name, string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query, list<string|\Illuminate\Database\Query\Expression>|null $columns = null)
  * @method static void renameView(string $from, string $to)
  * @method static void dropView(string $name, bool $ifExists = false)
  * @method static void dropViewIfExists(string $name)
- * @method static array getViewColumnListing(string $name)
+ * @method static list<string> getViewColumnListing(string $name)
  * @method static void refreshMaterializedView(string $name)
  *
  * @mixin \Illuminate\Support\Facades\Schema
