@@ -12,7 +12,7 @@ trait ManagesViews
      *
      * @param string $name
      * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @param string|null $algorithm
@@ -41,7 +41,7 @@ trait ManagesViews
      *
      * @param string $name
      * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @return void
      */
     public function createOrReplaceView($name, $query, ?array $columns = null)
@@ -54,7 +54,7 @@ trait ManagesViews
      *
      * @param string $name
      * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @return void
      */
     public function createMaterializedView(string $name, $query, ?array $columns = null): void
