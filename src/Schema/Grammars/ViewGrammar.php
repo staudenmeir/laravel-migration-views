@@ -9,7 +9,7 @@ interface ViewGrammar
      *
      * @param string $name
      * @param string $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @param string|null $algorithm

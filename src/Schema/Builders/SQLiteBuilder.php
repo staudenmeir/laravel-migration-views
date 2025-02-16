@@ -16,7 +16,7 @@ class SQLiteBuilder extends Base
      *
      * @param string $name
      * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @return void
