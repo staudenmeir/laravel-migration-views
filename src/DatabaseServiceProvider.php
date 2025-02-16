@@ -2,6 +2,7 @@
 
 namespace Staudenmeir\LaravelMigrationViews;
 
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Staudenmeir\LaravelMigrationViews\Facades\Schema;
 
@@ -14,11 +15,12 @@ class DatabaseServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Schema::class, function ($app) {
-            /** @var array{db: \Illuminate\Database\DatabaseManager} $app */
+        $this->app->bind(Schema::class, function (Application $app) {
+            /** @var \Illuminate\Database\DatabaseManager $db */
+            $db = $app->make('db');
 
             return Schema::getSchemaBuilder(
-                $app['db']->connection()
+                $db->connection()
             );
         });
     }
