@@ -3,6 +3,7 @@
 namespace Staudenmeir\LaravelMigrationViews\Schema\Builders;
 
 use Illuminate\Support\Str;
+use RuntimeException;
 use Stringable;
 
 trait ManagesViews
@@ -12,7 +13,7 @@ trait ManagesViews
      *
      * @param string $name
      * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @param string|null $algorithm
@@ -41,7 +42,7 @@ trait ManagesViews
      *
      * @param string $name
      * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @return void
      */
     public function createOrReplaceView($name, $query, ?array $columns = null)
@@ -54,7 +55,7 @@ trait ManagesViews
      *
      * @param string $name
      * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @return void
      */
     public function createMaterializedView(string $name, $query, ?array $columns = null): void
@@ -123,15 +124,16 @@ trait ManagesViews
      *
      * @param string $name
      * @param bool $ifExists
+     * @param bool $materialized
      * @return void
      */
-    public function dropView($name, $ifExists = false)
+    public function dropView($name, $ifExists = false, bool $materialized = false)
     {
         /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
         $grammar = $this->grammar;
 
         $this->connection->statement(
-            $grammar->compileDropView($name, $ifExists)
+            $grammar->compileDropView($name, $ifExists, $materialized)
         );
     }
 
@@ -144,6 +146,28 @@ trait ManagesViews
     public function dropViewIfExists($name)
     {
         $this->dropView($name, true);
+    }
+
+    /**
+     * Drop a materialized view from the schema.
+     *
+     * @param string $name
+     * @return void
+     */
+    public function dropMaterializedView(string $name): void
+    {
+        $this->dropView($name, materialized: true);
+    }
+
+    /**
+     * Drop a materialized view from the schema if it exists.
+     *
+     * @param string $name
+     * @return void
+     */
+    public function dropMaterializedViewIfExists(string $name): void
+    {
+        $this->dropView($name, ifExists: true, materialized: true);
     }
 
     /**
@@ -174,5 +198,16 @@ trait ManagesViews
         $this->connection->statement(
             $grammar->compileRefreshMaterializedView($name)
         );
+    }
+
+    /**
+     * Determine if the given materialized view exists.
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function hasMaterializedView(string $name): bool
+    {
+        throw new RuntimeException('This database is not supported.'); // @codeCoverageIgnore
     }
 }

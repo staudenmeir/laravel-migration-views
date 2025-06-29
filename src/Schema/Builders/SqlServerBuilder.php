@@ -15,7 +15,7 @@ class SqlServerBuilder extends Base
      *
      * @param string $name
      * @param string|\Illuminate\Database\Eloquent\Builder<*>|\Illuminate\Database\Query\Builder $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @return void
@@ -34,9 +34,10 @@ class SqlServerBuilder extends Base
      *
      * @param string $name
      * @param bool $ifExists
+     * @param bool $materialized
      * @return void
      */
-    public function dropView($name, $ifExists = false)
+    public function dropView($name, $ifExists = false, bool $materialized = false)
     {
         /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
         $grammar = $this->grammar;
