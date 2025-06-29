@@ -34,9 +34,10 @@ class SqlServerBuilder extends Base
      *
      * @param string $name
      * @param bool $ifExists
+     * @param bool $materialized
      * @return void
      */
-    public function dropView($name, $ifExists = false)
+    public function dropView($name, $ifExists = false, bool $materialized = false)
     {
         /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\ViewGrammar $grammar */
         $grammar = $this->grammar;

@@ -23,8 +23,11 @@ use Staudenmeir\LaravelMigrationViews\Schema\Grammars\SqlServerGrammar;
  * @method static void renameView(string $from, string $to)
  * @method static void dropView(string $name, bool $ifExists = false)
  * @method static void dropViewIfExists(string $name)
+ * @method static void dropMaterializedView(string $name)
+ * @method static void dropMaterializedViewIfExists(string $name)
  * @method static list<string> getViewColumnListing(string $name)
  * @method static void refreshMaterializedView(string $name)
+ * @method static bool hasMaterializedView(string $name)
  *
  * @mixin \Illuminate\Support\Facades\Schema
  */

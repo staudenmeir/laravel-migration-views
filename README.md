@@ -150,6 +150,21 @@ Use `refreshMaterializedView()` to refresh a materialized view:
 Schema::refreshMaterializedView('active_users');
 ```
 
+Use `dropMaterializedView()` or `dropMaterializedViewIfExists()` to drop a materialized view:
+
+```php
+Schema::dropMaterializedView('active_users');
+Schema::dropMaterializedViewIfExists('active_users');
+```
+
+Use `hasMaterializedView()` to check whether a materialized view exists:
+
+```php
+if (Schema::hasMaterializedView('active_users')) {
+    //
+}
+```
+
 ## Contributing
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) and [CODE OF CONDUCT](.github/CODE_OF_CONDUCT.md) for details.

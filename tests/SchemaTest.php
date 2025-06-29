@@ -127,6 +127,33 @@ class SchemaTest extends TestCase
         $this->assertFalse(Schema::hasView('active_users'));
     }
 
+    public function testDropMaterializedView(): void
+    {
+        if ($this->connection !== 'pgsql') {
+            $this->markTestSkipped();
+        }
+
+        Schema::createMaterializedView(
+            'active_users',
+            DB::table('users')->where('active', true)
+        );
+
+        Schema::dropMaterializedView('active_users');
+
+        $this->assertFalse(Schema::hasMaterializedView('active_users'));
+    }
+
+    public function testDropMaterializedViewIfExists(): void
+    {
+        if ($this->connection !== 'pgsql') {
+            $this->markTestSkipped();
+        }
+
+        Schema::dropMaterializedViewIfExists('active_users');
+
+        $this->assertFalse(Schema::hasMaterializedView('active_users'));
+    }
+
     public function testGetViewColumnListing()
     {
         Schema::createView('active_users', DB::table('users')->where('active', true));
@@ -153,5 +180,21 @@ class SchemaTest extends TestCase
         Schema::refreshMaterializedView('active_users');
 
         $this->assertDatabaseCount('active_users', 0);
+    }
+
+    public function testHasMaterializedView(): void
+    {
+        if ($this->connection !== 'pgsql') {
+            $this->markTestSkipped();
+        }
+
+        $this->assertFalse(Schema::hasMaterializedView('active_users'));
+
+        Schema::createMaterializedView(
+            'active_users',
+            DB::table('users')->where('active', true)
+        );
+
+        $this->assertTrue(Schema::hasMaterializedView('active_users'));
     }
 }
