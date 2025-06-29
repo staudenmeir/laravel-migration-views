@@ -36,7 +36,7 @@ class PostgresBuilder extends Base
     public function hasMaterializedView(string $name): bool
     {
         /** @var string $view */
-        [$schema, $view] = $this->parseSchemaAndTable($name);
+        [$schema, $view] = $this->parseSchemaAndTable($name, true);
 
         $view = $this->connection->getTablePrefix().$view;
 
