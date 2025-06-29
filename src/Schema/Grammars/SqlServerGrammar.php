@@ -9,7 +9,7 @@ class SqlServerGrammar extends Base implements ViewGrammar
     use CompilesViews;
 
     /** @inheritDoc */
-    public function compileDropView($name, $ifExists)
+    public function compileDropView($name, $ifExists, bool $materialized = false)
     {
         $ifExists = $ifExists ? 'if exists ('.$this->compileViewExists().') ' : '';
 
