@@ -26,4 +26,26 @@ class PostgresBuilder extends Base
 
         return $this->baseStringifyBindings($bindings);
     }
+
+    /**
+     * Determine if the given materialized view exists.
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function hasMaterializedView(string $name): bool
+    {
+        /** @var string $view */
+        [$schema, $view] = $this->parseSchemaAndTable($name);
+
+        $view = $this->connection->getTablePrefix().$view;
+
+        /** @var \Staudenmeir\LaravelMigrationViews\Schema\Grammars\PostgresGrammar $grammar */
+        $grammar = $this->grammar;
+
+        return (bool) $this->connection->scalar(
+            $grammar->compileMaterializedViewExists(),
+            [$schema, $view]
+        );
+    }
 }

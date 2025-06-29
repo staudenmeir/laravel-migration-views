@@ -9,7 +9,7 @@ interface ViewGrammar
      *
      * @param string $name
      * @param string $query
-     * @param list<string|\Illuminate\Database\Query\Expression>|null $columns
+     * @param list<string|\Illuminate\Database\Query\Expression<*>>|null $columns
      * @param bool $orReplace
      * @param bool $materialized
      * @param string|null $algorithm
@@ -22,9 +22,10 @@ interface ViewGrammar
      *
      * @param string $name
      * @param bool $ifExists
+     * @param bool $materialized
      * @return string
      */
-    public function compileDropView($name, $ifExists);
+    public function compileDropView($name, $ifExists, bool $materialized = false);
 
     /**
      * Compile the query to refresh a materialized view.
